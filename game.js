@@ -4,19 +4,25 @@ var green = new Audio("sounds/green.mp3");
 var red = new Audio("sounds/red.mp3");
 var yellow = new Audio("sounds/yellow.mp3");
 var blue = new Audio("sounds/blue.mp3");
+var wrong = new Audio("sounds/wrong.mp3");
 
 $(document).keydown(function(event){
   var keyPressed = event.key;
   if(keyPressed == 's')
     startGame();
     else {
-      $("h1").text("try again");
+      $("h1").text("Press 's'!");
+      wrongButton();
     }
   });
 
 // TODO: CRIAR animação do ERRO;
 // TODO: Refatorar
 // TODO: Logica do jogo
+
+
+// Lógica de animação
+
 function greenAnimation(){
   green.play();
   $("#green").addClass('pressed');
@@ -53,7 +59,6 @@ function blueAnimation(){
   }, 100);
 }
 
-
 $("#green").click(function(){
   greenAnimation();
 });
@@ -69,6 +74,16 @@ $("#yellow").click(function(){
 $("#blue").click(function(){
   blueAnimation();
 });
+
+function wrongButton(){
+  $("body").addClass('game-over');
+  wrong.play();
+
+  setTimeout(function() {
+    $("body").removeClass('game-over');
+  }, 100);
+}
+
 // --------------------------------------------------------------------------
 
 
@@ -76,11 +91,6 @@ $("#blue").click(function(){
 function startGame(){
   // execute
   $("h1").text("Game Starting");
-}
-
-function wrongAnswer(){
-  $("h1").text("Wrong!");
-
 }
 
 
